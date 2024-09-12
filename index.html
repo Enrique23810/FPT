@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historia Interactiva</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f4a4a4; /* Fondo rosa */
+      margin: 0;
+      padding: 0;
+      height: 100vh; /* Asegura que la página ocupe toda la altura de la ventana */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 1s ease; /* Transición de color de fondo */
+    }
+    #story {
+      background-color: #ffffff; /* Fondo blanco para el contenido */
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      max-width: 100%;
+      max-height: 100%; /* Para que el contenedor no se exceda del tamaño de la ventana */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      max-height: 70vh; /* Limita la altura de la imagen al 70% del viewport */
+      object-fit: contain; /* Hace que la imagen se ajuste sin perder proporciones */
+      border: 5px solid #ddd; /* Marco gris claro */
+      border-radius: 10px;
+      margin-bottom: 20px;
+      transition: opacity 1s ease-in-out; /* Transición de opacidad */
+    }
+    img.active {
+      opacity: 1;
+    }
+    p {
+      font-size: 22px;
+      color: #333;
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+    button {
+      background-color: #007bff; /* Botón azul */
+      color: #fff;
+      border: none;
+      padding: 15px 25px;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0056b3; /* Azul oscuro al pasar el ratón */
+    }
+  </style>
+</head>
+<body>
+  <div id="story">
+    <img id="image" class="active" src="images/rose1.jpg" alt="Foto 1">
+    <p id="text">Esta es la primer foto.</p>
+    <button onclick="nextStory()">Siguiente</button>
+  </div>
+
+  <script>
+    // Array de imágenes y textos de la historia
+    const story = [
+      { img: "images/rose1.jpg", text: "Se veria la primer foto" },
+      { img: "images/rose2.jpg", text: "Segunda Foto" },
+      { img: "images/rose3.jpg", text: "Tercer Foto" },
+      { img: "images/rose4.jpeg", text: "Cuarta Foto (se pueden tomar mas fotos)" }
+    ];
+
+    let currentIndex = 0;
+
+    // Función para cambiar imagen y texto
+    function nextStory() {
+      const bodyElement = document.body;
+      const imageElement = document.getElementById("image");
+      currentIndex++;
+      if (currentIndex < story.length) {
+        const nextStory = story[currentIndex];
+        imageElement.classList.remove("active");
+        
+        // Esperar la transición de opacidad antes de cambiar la imagen
+        setTimeout(() => {
+          // Cambiar la imagen
+          imageElement.src = nextStory.img;
+          document.getElementById("text").innerText = nextStory.text;
+          // Cambiar el fondo de la página
+          bodyElement.style.backgroundColor = getRandomColor();
+          imageElement.classList.add("active");
+        }, 1000); // Tiempo de espera debe coincidir con la duración de la transición (1s)
+        
+      } else {
+        document.getElementById("text").innerText = "Fin de la historia.";
+        imageElement.style.display = "none"; // Ocultar imagen al final
+        document.querySelector("button").style.display = "none"; // Ocultar botón al final
+      }
+    }
+
+    // Función para obtener un color aleatorio
+    function getRandomColor() {
+      const colors = ['#f4a4a4', '#ffebcd', '#e0ffff', '#f5deb3', '#f0e68c'];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+  </script>
+</body>
+</html>
