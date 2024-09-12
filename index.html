@@ -21,6 +21,7 @@
       justify-content: center;
       align-items: center;
       transition: background-color 1s ease; /* Transición de color de fondo */
+      overflow: hidden; /* Evita el scroll cuando se exceda el contenido */
     }
     #story {
       background-color: #ffffff; /* Fondo blanco para el contenido */
@@ -43,9 +44,6 @@
       margin-bottom: 20px;
       transition: opacity 1s ease-in-out; /* Transición de opacidad */
     }
-    img.active {
-      opacity: 1;
-    }
     p {
       font-size: 22px;
       color: #333;
@@ -66,22 +64,50 @@
     button:hover {
       background-color: #0056b3; /* Azul oscuro al pasar el ratón */
     }
+
+    /* Media Query para pantallas pequeñas (como móviles) */
+    @media (max-width: 768px) {
+      p {
+        font-size: 18px; /* Reducimos el tamaño del texto en móviles */
+      }
+      img {
+        max-height: 60vh; /* Reducimos un poco la altura de la imagen en móviles */
+      }
+      button {
+        font-size: 16px;
+        padding: 10px 20px; /* Botón más pequeño en móviles */
+      }
+    }
+
+    /* Media Query para pantallas muy pequeñas (teléfonos en vertical) */
+    @media (max-width: 480px) {
+      p {
+        font-size: 16px;
+      }
+      img {
+        max-height: 50vh; /* Aún más pequeña en teléfonos */
+      }
+      button {
+        font-size: 14px;
+        padding: 8px 16px; /* Botón aún más pequeño */
+      }
+    }
   </style>
 </head>
 <body>
   <div id="story">
     <img id="image" class="active" src="images/rose1.jpg" alt="Foto 1">
-    <p id="text">Esta es la primer foto.</p>
+    <p id="text">Esta es la primera parte de la historia.</p>
     <button onclick="nextStory()">Siguiente</button>
   </div>
 
   <script>
     // Array de imágenes y textos de la historia
     const story = [
-      { img: "images/rose1.jpg", text: "Se veria la primer foto" },
-      { img: "images/rose2.jpg", text: "Segunda Foto" },
-      { img: "images/rose3.jpg", text: "Tercer Foto" },
-      { img: "images/rose4.jpeg", text: "Cuarta Foto (se pueden tomar mas fotos)" }
+      { img: "images/rose1.jpg", text: "Esta es la primera parte de la historia." },
+      { img: "images/rose2.jpg", text: "Aquí continuamos con el segundo capítulo." },
+      { img: "images/rose3.jpg", text: "Este es el desenlace emocionante." },
+      { img: "images/rose4.jpeg", text: "Y así termina nuestra historia." }
     ];
 
     let currentIndex = 0;
