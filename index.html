@@ -3,144 +3,246 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Historia Interactiva</title>
+  <title>La Historia de Fernanda</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@400;500&family=Amatic+SC:wght@700&display=swap');
+    
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f4a4a4; /* Fondo rosa */
-      margin: 0;
-      padding: 0;
-      height: 100vh; /* Asegura que la página ocupe toda la altura de la ventana */
+      font-family: 'Roboto', sans-serif;
+      background-color: #fffbe6;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: background-color 1s ease; /* Transición de color de fondo */
-      overflow: hidden; /* Evita el scroll cuando se exceda el contenido */
+      transition: background-color 1s ease;
+      overflow: hidden;
     }
     #story {
-      background-color: #ffffff; /* Fondo blanco para el contenido */
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      max-width: 100%;
-      max-height: 100%; /* Para que el contenedor no se exceda del tamaño de la ventana */
+      background: linear-gradient(135deg, #fff5cc, #fff8e1, #fffbe6);
+      padding: 50px;
+      border-radius: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      max-width: 90%;
+      max-height: 90%;
       display: flex;
       flex-direction: column;
       align-items: center;
+      text-align: center;
+      animation: fadeIn 1s ease;
+      border: 3px solid #f5c518;
+      position: relative;
+    }
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 48px;
+      color: #f5b041;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+      animation: bounce 1s ease infinite;
+    }
+    .flower {
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 100px;
+      height: 100px;
+      background-image: url('https://i.imgur.com/KfDWz5u.png'); /* Imagen decorativa */
+      background-size: cover;
+      transform: rotate(-10deg);
+      animation: spin 4s linear infinite;
     }
     img {
       width: 100%;
       height: auto;
-      max-height: 70vh; /* Limita la altura de la imagen al 70% del viewport */
-      object-fit: contain; /* Hace que la imagen se ajuste sin perder proporciones */
-      border: 5px solid #ddd; /* Marco gris claro */
-      border-radius: 10px;
-      margin-bottom: 20px;
-      transition: opacity 1s ease-in-out; /* Transición de opacidad */
+      max-height: 50vh;
+      object-fit: cover;
+      border: 10px solid #f5c518;
+      border-radius: 20px;
+      margin-bottom: 25px;
+      transition: transform 1s ease, opacity 1s ease-in-out;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+    img.active {
+      transform: scale(1.08) rotate(2deg);
+      opacity: 1;
+    }
+    img:not(.active) {
+      opacity: 0.6;
     }
     p {
-      font-size: 22px;
-      color: #333;
-      margin-top: 20px;
-      line-height: 1.6;
+      font-size: 24px;
+      color: #444;
+      margin-top: 10px;
+      line-height: 1.8;
+      background-color: rgba(255, 248, 205, 0.8);
+      padding: 20px;
+      border-radius: 15px;
+      font-family: 'Amatic SC', cursive;
+      letter-spacing: 1px;
+      border: 3px dashed #f5c518;
+      animation: pulse 2s infinite;
+    }
+    p strong {
+      color: #f5b041;
+      font-size: 26px;
     }
     button {
-      background-color: #007bff; /* Botón azul */
+      background-color: #f5b041;
       color: #fff;
       border: none;
-      padding: 15px 25px;
-      font-size: 18px;
-      border-radius: 5px;
+      padding: 18px 45px;
+      font-size: 22px;
+      font-family: 'Roboto', sans-serif;
+      border-radius: 12px;
       cursor: pointer;
-      margin-top: 20px;
-      transition: background-color 0.3s ease;
+      margin-top: 30px;
+      transition: background-color 0.4s ease, transform 0.4s ease;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      animation: popIn 0.8s ease forwards;
     }
     button:hover {
-      background-color: #0056b3; /* Azul oscuro al pasar el ratón */
+      background-color: #d4ac0d;
+      transform: scale(1.07);
+    }
+    button:active {
+      transform: scale(0.98);
     }
 
-    /* Media Query para pantallas pequeñas (como móviles) */
+    /* Animaciones */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Media Queries */
     @media (max-width: 768px) {
+      h1 {
+        font-size: 36px;
+      }
       p {
-        font-size: 18px; /* Reducimos el tamaño del texto en móviles */
+        font-size: 20px;
       }
       img {
-        max-height: 60vh; /* Reducimos un poco la altura de la imagen en móviles */
+        max-height: 45vh;
       }
       button {
-        font-size: 16px;
-        padding: 10px 20px; /* Botón más pequeño en móviles */
+        font-size: 20px;
+        padding: 12px 30px;
       }
     }
-
-    /* Media Query para pantallas muy pequeñas (teléfonos en vertical) */
     @media (max-width: 480px) {
+      h1 {
+        font-size: 30px;
+      }
       p {
-        font-size: 16px;
+        font-size: 18px;
       }
       img {
-        max-height: 50vh; /* Aún más pequeña en teléfonos */
+        max-height: 40vh;
       }
       button {
-        font-size: 14px;
-        padding: 8px 16px; /* Botón aún más pequeño */
+        font-size: 18px;
+        padding: 10px 25px;
       }
     }
   </style>
 </head>
 <body>
   <div id="story">
+    <div class="flower"></div>
+    <h1>La Historia de Fernanda</h1>
     <img id="image" class="active" src="images/rose1.jpg" alt="Foto 1">
-    <p id="text">Esta es la primera parte de la historia.</p>
+    <p id="text">Esta es la <strong>primera</strong> parte de la increíble historia de Fernanda.</p>
     <button onclick="nextStory()">Siguiente</button>
   </div>
 
   <script>
-    // Array de imágenes y textos de la historia
     const story = [
-      { img: "images/rose1.jpg", text: "Esta es la primera parte de la historia." },
-      { img: "images/rose2.jpg", text: "Aquí continuamos con el segundo capítulo." },
-      { img: "images/rose3.jpg", text: "Este es el desenlace emocionante." },
-      { img: "images/rose4.jpeg", text: "Y así termina nuestra historia." }
+      { img: "images/rose1.jpg", text: "Esta es la <strong>primera</strong> parte de la increíble historia de Fernanda." },
+      { img: "images/rose2.jpg", text: "Aquí <strong>continuamos</strong> con un capítulo lleno de aventuras." },
+      { img: "images/rose3.jpg", text: "Este es el <strong>desenlace emocionante</strong>, lleno de emociones." },
+      { img: "images/rose4.jpeg", text: "Y así concluye la maravillosa historia de <strong>Fernanda</strong>." }
     ];
 
     let currentIndex = 0;
 
-    // Función para cambiar imagen y texto
     function nextStory() {
       const bodyElement = document.body;
       const imageElement = document.getElementById("image");
       currentIndex++;
+
       if (currentIndex < story.length) {
         const nextStory = story[currentIndex];
         imageElement.classList.remove("active");
         
-        // Esperar la transición de opacidad antes de cambiar la imagen
         setTimeout(() => {
-          // Cambiar la imagen
           imageElement.src = nextStory.img;
-          document.getElementById("text").innerText = nextStory.text;
-          // Cambiar el fondo de la página
+          document.getElementById("text").innerHTML = nextStory.text;
           bodyElement.style.backgroundColor = getRandomColor();
           imageElement.classList.add("active");
-        }, 1000); // Tiempo de espera debe coincidir con la duración de la transición (1s)
+        }, 1000);
         
       } else {
-        document.getElementById("text").innerText = "Fin de la historia.";
-        imageElement.style.display = "none"; // Ocultar imagen al final
-        document.querySelector("button").style.display = "none"; // Ocultar botón al final
+        document.getElementById("text").innerHTML = "Fin de la historia de <strong>Fernanda</strong>.";
+        imageElement.style.display = "none";
+        document.querySelector("button").style.display = "none";
       }
     }
 
-    // Función para obtener un color aleatorio
     function getRandomColor() {
-      const colors = ['#f4a4a4', '#ffebcd', '#e0ffff', '#f5deb3', '#f0e68c'];
+      const colors = ['#fff8e1', '#ffebcd', '#f5c518', '#ffe680', '#f7d358', '#ffd700', '#f4e5b2'];
       return colors[Math.floor(Math.random() * colors.length)];
     }
   </script>
